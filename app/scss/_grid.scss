@@ -1,0 +1,86 @@
+/* Reset the Box Model */
+.row,
+.column {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: auto 15px;
+}
+
+.row {
+  margin: auto -15px;
+}
+
+.col {
+  position: relative;
+  float: left;
+  padding: 15px;
+}
+
+.col + .col {
+  margin-left: 1.6%;
+}
+
+/*
+  scw = (100 - (m*(mc-1)))/mc
+  scw = single column width
+  m = margin (1.6%)
+  mc = maximum columns (12)
+
+ cw = (scw*cs) + (m*(cs-1))
+
+ cw = column width
+ scw = single column width (6.86666666667%)
+ cs = column span (1-12)
+ m = margin (1.6%)
+ */
+
+@function single-column-width($margin, $max-cols) {
+  @return (100 - ($margin * ($max-cols - 1))) / $max-cols
+}
+
+$margin: 1.6%;
+$scw: single-column-width($margin, 12);
+
+
+@function column-width($scw, $col-span, $margin) {
+  @return ($scw * $col-span) + ($margin * ($col-span - 1))
+}
+
+.col-xs { /* <768px  */ }
+.col-sm { /* 768px to 991px */ }
+.col-md { /* 992px to 1199px */ }
+.col-lg { /* >= 1200px */ }
+
+.col-xs-offset {}
+.col-xs-push {}
+.col-xs-pull {}
+
+@media only screen and (max-width: 550px) {
+  .col-1,
+  .col-2,
+  .col-3,
+  .col-4,
+  .col-5,
+  .col-6,
+  .col-7,
+  .col-8,
+  .col-9,
+  .col-10,
+  .col-11,
+  .col-12 {
+    width: auto;
+    float: none;
+  }
+
+  .col + .col {
+    margin-left: 0;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
