@@ -2,11 +2,13 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { browserHistory, Router, Route, IndexRoute } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
-import reducer from './reducers'
+import { getAllProducts } from './actions'
+import { routes } from './constants'
+import { products, discount, promoCode } from './reducers'
 import App from './components/App'
 import Catalogue from './components/Catalogue'
 import Checkout from './components/Checkout'
@@ -15,34 +17,36 @@ import Failure from './components/Failure'
 import PageNotFound from './components/PageNotFound'
 
 const middleware = process.env.NODE_ENV === 'production' ?
-  [ thunk ] :
-  [ thunk, logger() ]
+  [ thunk, routerMiddleware(browserHistory) ] :
+  [ thunk, routerMiddleware(browserHistory), logger() ]
+
+const reducer = combineReducers({
+  products,
+  discount,
+  promoCode,
+  routing: routerReducer
+});
 
 const store = createStore(
-  combineReducers({
-    reducer,
-    routing: routerReducer
-  }),
+  reducer,
   applyMiddleware(...middleware)
 )
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+store.dispatch(getAllProducts())
+
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}>
+      <Route path={routes.Catalogue} component={App}>
         <IndexRoute component={Catalogue} />
-        <Route path="checkout" component={Checkout} />
-        <Route path="success" component={Success} />
-        <Route path="failure" component={Failure} />
-        <Route path="*" component={PageNotFound} />
+        <Route path={routes.Checkout} component={Checkout} />
+        <Route path={routes.Success} component={Success} />
+        <Route path={routes.Failure} component={Failure} />
+        <Route path={routes.PageNotFound} component={PageNotFound} />
       </Route>
     </Router>
   </Provider>,
   document.getElementById('app')
 )
-
-        // <Route path="checkout" component={Checkout} />
-        // <Route path="success" component={Success} />
-        // <Route path="failure" component={Failure} />

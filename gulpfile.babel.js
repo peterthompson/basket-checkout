@@ -82,6 +82,11 @@ gulp.task('default', done => {
 })
 
 gulp.task('test', () => {
-  return gulp.src('test/**/*.spec.js')
+  return gulp.src('test/**/*.js')
     .pipe(mocha());
+})
+
+gulp.task('test:watch', ['test'], () => {
+  gulp.watch('app/js/**/*.js', ['test']);
+  gulp.watch('test/**/*.spec.js', ['test']);
 })

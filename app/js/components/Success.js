@@ -2,6 +2,6 @@ import React from 'react'
 
 export default () => (
   <div>
-    <h2>Success</h2>
+    <p>Thank you, your order is being processed.</p>
   </div>
 )

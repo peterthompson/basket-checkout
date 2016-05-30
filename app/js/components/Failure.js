@@ -2,6 +2,6 @@ import React from 'react'
 
 export default () => (
   <div>
-    <h2>Failure</h2>
+    <p>Sorry there was a problem with your order, please call customer service on XXXXXXXXXX.</p>
   </div>
 )

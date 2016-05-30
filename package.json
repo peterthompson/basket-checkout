@@ -20,13 +20,18 @@
   "devDependencies": {
     "babel-core": "^6.8.0",
     "babel-eslint": "^6.0.4",
+    "babel-plugin-transform-class-properties": "^6.9.0",
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
     "babelify": "^7.3.0",
     "browser-sync": "^2.12.8",
     "browserify": "^13.0.1",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
     "connect-history-api-fallback": "^1.2.0",
     "deep-freeze": "0.0.1",
+    "enzyme": "^2.3.0",
     "expect": "^1.20.1",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.2",
@@ -36,13 +41,23 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "jsdom": "^9.1.0",
+    "nock": "^8.0.0",
+    "react-addons-test-utils": "^15.1.0",
+    "redux-mock-store": "^1.0.3",
     "run-sequence": "^1.2.0",
+    "sinon": "^1.17.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "axios": "^0.11.1",
+    "fetch": "^1.0.1",
+    "font-awesome": "^4.6.3",
+    "isomorphic-fetch": "^2.2.1",
+    "luhn": "^2.1.0",
     "normalize.css": "^4.1.1",
+    "normalizr": "^2.1.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
@@ -50,6 +65,9 @@
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "request": "^2.72.0",
+    "reselect": "^2.5.1",
+    "superagent": "^2.0.0-alpha.3"
   }
 }
