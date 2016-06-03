@@ -1,4 +1,4 @@
-# Project Starter
+# Basket Checkout
 
 ## Setup
 
