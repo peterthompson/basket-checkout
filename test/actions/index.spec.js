@@ -35,6 +35,17 @@ describe('receiveProducts action creator', () => {
   });
 });
 
+describe('addToBasket action creator', () => {
+  it('should create an action to add a product to the basket', () => {
+    const id = '1';
+    const expectedAction = {
+      type: types.ADD_TO_BASKET,
+      payload: { id }
+    };
+    expect(actions.addToBasket(id)).toEqual(expectedAction);
+  });
+});
+
 describe('getAllProducts action creator', () => {
   afterEach(() => {
     nock.cleanAll()
