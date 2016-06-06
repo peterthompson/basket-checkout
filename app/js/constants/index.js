@@ -9,6 +9,6 @@ export const routes = {
 export const api = {
   baseUrl: 'http://localhost:9001',
   products: '/products',
-  promocode: '/promocode',
+  promoCode: '/promocode',
   checkout: '/checkout'
 }

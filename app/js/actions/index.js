@@ -66,7 +66,7 @@ export function getAllProducts () {
 export function applyPromoCode (promoCode) {
   return dispatch => {
     dispatch(receivePromoCode(promoCode));
-    return fetch(api.baseUrl + api.promocode, {
+    return fetch(api.baseUrl + api.promoCode, {
       method: 'POST',
       body: JSON.stringify({ promoCode })
     })
