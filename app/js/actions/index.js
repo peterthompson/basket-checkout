@@ -4,58 +4,43 @@ import { api } from '../constants'
 import * as types from '../constants/ActionTypes'
 import { routes } from '../constants'
 
-export function receiveProducts (products) {
-  return {
-    type: types.RECEIVE_PRODUCTS,
-    payload: { products }
-  }
-}
+export const receiveProducts = (products) => ({
+  type: types.RECEIVE_PRODUCTS,
+  payload: { products }
+})
 
-export function addToBasket (id) {
-  return {
-    type: types.ADD_TO_BASKET,
-    payload: { id }
-  }
-}
+export const addToBasket = (id) => ({
+  type: types.ADD_TO_BASKET,
+  payload: { id }
+})
 
-export function removeFromBasket (id) {
-  return {
-    type: types.REMOVE_FROM_BASKET,
-    payload: { id }
-  }
-}
+export const removeFromBasket = (id) => ({
+  type: types.REMOVE_FROM_BASKET,
+  payload: { id }
+})
 
-export function changeQuantity (id, quantity) {
-  return {
-    type: types.CHANGE_QUANTITY,
-    payload: { id, quantity: parseInt(quantity) }
-  }
-}
+export const changeQuantity = (id, quantity) => ({
+  type: types.CHANGE_QUANTITY,
+  payload: { id, quantity: parseInt(quantity) }
+})
 
-export function receivePromoCode (promoCode) {
-  return {
-    type: types.RECEIVE_PROMO_CODE,
-    payload: { promoCode }
-  }
-}
+export const receivePromoCode = (promoCode) => ({
+  type: types.RECEIVE_PROMO_CODE,
+  payload: { promoCode }
+})
 
-export function receiveDiscount (discount) {
-  return {
-    type: types.RECEIVE_DISCOUNT,
-    payload: { discount }
-  }
-}
+export const receiveDiscount = (discount) => ({
+  type: types.RECEIVE_DISCOUNT,
+  payload: { discount }
+})
 
-export function checkoutSuccess () {
-  return {
-    type: types.CHECKOUT_SUCCESS
-  }
-}
-export function checkoutFailure () {
-  return {
+export const checkoutSuccess = () => ({
+  type: types.CHECKOUT_SUCCESS
+})
+
+export const checkoutFailure = () => ({
     type: types.CHECKOUT_FAILURE
-  }
-}
+})
 
 export function getAllProducts () {
   return dispatch => fetch(api.baseUrl + api.products)
