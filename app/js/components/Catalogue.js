@@ -52,12 +52,10 @@ export class Catalogue extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
+const mapStateToProps = (state, ownProps) => ({
     quantityInBasket: getQuantityInBasket(state),
     productsInCatalogue: state.products
-  }
-}
+})
 
 export default connect(
   mapStateToProps,
