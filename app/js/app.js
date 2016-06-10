@@ -15,6 +15,7 @@ import Checkout from './components/Checkout'
 import Success from './components/Success'
 import Failure from './components/Failure'
 import PageNotFound from './components/PageNotFound'
+import { loadState, saveState } from './localStorage'
 
 const middleware = process.env.NODE_ENV === 'production' ?
   [ thunk, routerMiddleware(browserHistory) ] :
@@ -27,10 +28,19 @@ const reducer = combineReducers({
   routing: routerReducer
 });
 
+const persistedState = loadState();
+
 const store = createStore(
   reducer,
+  persistedState,
   applyMiddleware(...middleware)
 )
+
+store.subscribe(() => {
+  saveState({
+    products: store.getState().products
+  });
+})
 
 const history = syncHistoryWithStore(browserHistory, store)
 
