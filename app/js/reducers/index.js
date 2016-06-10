@@ -42,14 +42,16 @@ export function products (state = [], action) {
     case types.RECEIVE_PRODUCTS:
       return action.payload.products
         .map(product => {
-          const quantity = state
+          let quantity = state
             .reduce((prev, curr, index, products) => (products[index].id === product.sku.toString()) ? products[index].quantity : prev, 0);
+          if (quantity > 10) quantity = 10;
+          const linePrice = quantity ? `£${(product.price * quantity).toFixed(2)}` : '£0.00';
           return {
             id: product.sku.toString(),
             name: product.name,
             price: `£${product.price.toFixed(2)}`,
             quantity,
-            linePrice: '£0.00'
+            linePrice
           }});
     case types.ADD_TO_BASKET:
       return state.map(product => {

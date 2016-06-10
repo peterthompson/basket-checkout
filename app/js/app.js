@@ -2,10 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { browserHistory, Router, Route, IndexRoute } from 'react-router'
-import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import logger from 'redux-logger'
-import thunk from 'redux-thunk'
+import { syncHistoryWithStore } from 'react-router-redux'
 import { getAllProducts } from './actions'
 import { routes } from './constants'
 import { products, discount, promoCode } from './reducers'
@@ -15,32 +12,9 @@ import Checkout from './components/Checkout'
 import Success from './components/Success'
 import Failure from './components/Failure'
 import PageNotFound from './components/PageNotFound'
-import { loadState, saveState } from './localStorage'
+import configureStore from './configureStore'
 
-const middleware = process.env.NODE_ENV === 'production' ?
-  [ thunk, routerMiddleware(browserHistory) ] :
-  [ thunk, routerMiddleware(browserHistory), logger() ]
-
-const reducer = combineReducers({
-  products,
-  discount,
-  promoCode,
-  routing: routerReducer
-});
-
-const persistedState = loadState();
-
-const store = createStore(
-  reducer,
-  persistedState,
-  applyMiddleware(...middleware)
-)
-
-store.subscribe(() => {
-  saveState({
-    products: store.getState().products
-  });
-})
+const store = configureStore();
 
 const history = syncHistoryWithStore(browserHistory, store)
 
