@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { routes } from '../constants'
-import { addToBasket } from '../actions'
+import { addToBasket, getAllProducts } from '../actions'
 import { getQuantityInBasket } from '../reducers'
 
 export class Catalogue extends Component {
@@ -14,11 +14,17 @@ export class Catalogue extends Component {
       name: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired
     })),
-    addToBasket: PropTypes.func
+    addToBasket: PropTypes.func,
+    getAllProducts: PropTypes.func,
+    isFetching: PropTypes.bool
   };
 
+  componentDidMount() {
+    this.props.getAllProducts();
+  }
+
   render() {
-    const { quantityInBasket, productsInCatalogue: products, addToBasket } = this.props;
+    const { quantityInBasket, productsInCatalogue: products, addToBasket, isFetching } = this.props;
     return (
       <div>
         <h2>Catalogue</h2>
@@ -27,6 +33,7 @@ export class Catalogue extends Component {
           {' '}
           {quantityInBasket ? quantityInBasket : 0}
         </Link>
+        {isFetching ? <p>loading&hellip;</p> :
         <table>
           <caption className="hidden">The products available to purchase.</caption>
 					<tbody>
@@ -46,6 +53,7 @@ export class Catalogue extends Component {
             ))}
 					</tbody>
         </table>
+        }
         <Link to={routes.Checkout}>Proceed to checkout</Link>
       </div>
     )
@@ -54,10 +62,11 @@ export class Catalogue extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
     quantityInBasket: getQuantityInBasket(state),
-    productsInCatalogue: state.products
+    productsInCatalogue: state.products,
+    isFetching: state.isFetching
 })
 
 export default connect(
   mapStateToProps,
-  { addToBasket }
+  { addToBasket, getAllProducts }
 )(Catalogue)

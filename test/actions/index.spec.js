@@ -43,6 +43,15 @@ const products = [
 
 const creditCard = '000000000000000';
 
+describe('requestProducts action creator', () => {
+  it('should create an action to request products', () => {
+    const expectedAction = {
+      type: types.REQUEST_PRODUCTS
+    };
+    expect(actions.requestProducts(products)).toEqual(expectedAction);
+  });
+});
+
 describe('receiveProducts action creator', () => {
   it('should create an action to receive products', () => {
     const expectedAction = {
@@ -132,13 +141,16 @@ describe('getAllProducts action creator', () => {
     nock.cleanAll()
   })
 
-  it(`should create ${types.RECEIVE_PRODUCTS} when it receives products`, () => {
+  it(`should create ${types.REQUEST_PRODUCTS} and ${types.RECEIVE_PRODUCTS}`, () => {
 
     nock(api.baseUrl)
       .get(api.products)
       .reply(200, products);
 
-    const expectedActions = [{ type: types.RECEIVE_PRODUCTS, payload: { products }}];
+    const expectedActions = [
+      { type: types.REQUEST_PRODUCTS },
+      { type: types.RECEIVE_PRODUCTS, payload: { products }}
+    ];
     const store = mockStore({ products: [] });
 
     return store.dispatch(actions.getAllProducts())

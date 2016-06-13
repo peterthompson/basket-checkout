@@ -37,6 +37,17 @@ export function getBasketTotal (state) {
   return `£${(subTotal - discount).toFixed(2)}`;
 }
 
+export function isFetching (state = false, action) {
+  switch (action.type) {
+    case types.RECEIVE_PRODUCTS:
+      return false;
+    case types.REQUEST_PRODUCTS:
+      return true;
+    default:
+      return state;
+  }
+}
+
 export function products (state = [], action) {
   switch (action.type) {
     case types.RECEIVE_PRODUCTS:

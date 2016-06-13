@@ -82,6 +82,27 @@ describe('getBasketTotal', () => {
   });
 });
 
+describe('isFetching', () => {
+  it('should handle initial state', () => {
+    expect(reducers.isFetching(undefined, {})).toEqual(false)
+  });
+
+  it(`should handle action type ${types.REQUEST_PRODUCTS}`, () => {
+    const action = { type: types.REQUEST_PRODUCTS };
+    expect(reducers.isFetching(undefined, action)).toEqual(true);
+  });
+
+  it(`should handle action type ${types.RECEIVE_PRODUCTS}`, () => {
+    const action = { type: types.RECEIVE_PRODUCTS };
+    expect(reducers.isFetching(undefined, action)).toEqual(false);
+  });
+
+  it('should handle unknown action types', () => {
+    const action = { type: 'UNKNOWN' };
+    expect(reducers.isFetching(undefined, action)).toEqual(false);
+  });
+});
+
 describe('products', () => {
   it('should handle initial state', () => {
     expect(

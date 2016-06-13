@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise'
-import { products, discount, promoCode } from './reducers'
+import { products, discount, promoCode, isFetching } from './reducers'
 import { loadState, saveState } from './localStorage'
 import throttle from 'lodash/throttle'
 
@@ -23,6 +23,7 @@ const configureStore = () => {
     products,
     discount,
     promoCode,
+    isFetching,
     routing: routerReducer
   });
 

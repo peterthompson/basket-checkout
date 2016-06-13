@@ -11,8 +11,6 @@ const store = configureStore();
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-store.dispatch(getAllProducts())
-
 render(
   <Root store={store} history={history} />,
   document.getElementById('root')

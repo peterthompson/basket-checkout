@@ -4,6 +4,10 @@ import { api } from '../constants'
 import * as types from '../constants/ActionTypes'
 import { routes } from '../constants'
 
+export const requestProducts = () => ({
+  type: types.REQUEST_PRODUCTS
+})
+
 export const receiveProducts = (products) => ({
   type: types.RECEIVE_PRODUCTS,
   payload: { products }
@@ -43,9 +47,12 @@ export const checkoutFailure = () => ({
 })
 
 export function getAllProducts () {
-  return dispatch => fetch(api.baseUrl + api.products)
+  return dispatch => {
+    dispatch(requestProducts());
+    return fetch(api.baseUrl + api.products)
     .then(res => res.json())
     .then(products => dispatch(receiveProducts(products)));
+  }
 }
 
 export function applyPromoCode (promoCode) {
