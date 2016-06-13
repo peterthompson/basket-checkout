@@ -10,8 +10,10 @@ const render = jsx => {
   const wrapper = shallow(jsx);
   const basketLink = wrapper.findWhere(n => n.is(Link) && n.contains('Basket'));
   const proceedToCheckoutLink = wrapper.findWhere(n => n.is(Link) && n.contains('Proceed to checkout'));
+  const loading = wrapper.findWhere(n => n.is('p') && n.contains('loading…'));
   const productCatalogue = wrapper.find('table');
-  return { basketLink, proceedToCheckoutLink, productCatalogue }
+  const instance = wrapper.instance();
+  return { basketLink, proceedToCheckoutLink, loading, productCatalogue, instance }
 }
 
 let props;
@@ -31,7 +33,8 @@ beforeEach(() => {
         price: '£2.22'
       }
     ],
-    addToBasket: sinon.spy()
+    addToBasket: sinon.spy(),
+    getAllProducts: sinon.spy()
   };
 });
 
@@ -67,5 +70,16 @@ describe('Catalogue component', () => {
     const { proceedToCheckoutLink } = render(<Catalogue {...props} />);
     assert.equal(proceedToCheckoutLink.length, 1, `did not find a 'Proceed to checkout' link, found ${proceedToCheckoutLink.length}`);
     assert.equal(proceedToCheckoutLink.prop('to'), routes.Checkout, `the 'Proceed to checkout' link did not go to the Checkout`)
-  })
+  });
+
+  it(`should call 'getAllProducts' when it mounts`, () => {
+    const { instance } = render(<Catalogue {...props} />);
+    instance.componentDidMount();
+    assert(props.getAllProducts.calledOnce, `the 'getAllProducts' prop was called`);
+  });
+
+  it(`should render a 'loading' notification when products are being fetched`, () => {
+    const { loading } = render(<Catalogue {...props} isFetching={true} />);
+    assert.equal(loading.length, 1, `did not find a 'loading' notification, found ${loading.length}`);
+  });
 })
