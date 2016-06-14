@@ -46,29 +46,25 @@ export const checkoutFailure = () => ({
     type: types.CHECKOUT_FAILURE
 })
 
-export function getAllProducts () {
-  return dispatch => {
-    dispatch(requestProducts());
-    return fetch(api.baseUrl + api.products)
-    .then(res => res.json())
-    .then(products => dispatch(receiveProducts(products)));
-  }
+export const getAllProducts = () => (dispatch, getState) => {
+  dispatch(requestProducts());
+  return fetch(api.baseUrl + api.products)
+  .then(res => res.json())
+  .then(products => dispatch(receiveProducts(products)));
 }
 
-export function applyPromoCode (promoCode) {
-  return dispatch => {
-    dispatch(receivePromoCode(promoCode));
-    return fetch(api.baseUrl + api.promoCode, {
-      method: 'POST',
-      body: JSON.stringify({ promoCode })
-    })
-    .then(res => res.json())
-    .then(discount => dispatch(receiveDiscount(discount)))
-  }
+export const applyPromoCode = (promoCode) => (dispatch) => {
+  dispatch(receivePromoCode(promoCode));
+  return fetch(api.baseUrl + api.promoCode, {
+    method: 'POST',
+    body: JSON.stringify({ promoCode })
+  })
+  .then(res => res.json())
+  .then(discount => dispatch(receiveDiscount(discount)))
 }
 
-export function checkout (productsInBasket, creditCard) {
-  return dispatch => fetch(api.baseUrl + api.checkout, {
+export const checkout = (productsInBasket, creditCard) => (dispatch) => {
+  return fetch(api.baseUrl + api.checkout, {
     method: 'POST',
     body: JSON.stringify({
       basket: productsInBasket.map(product => ({
