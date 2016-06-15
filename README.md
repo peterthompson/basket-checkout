@@ -12,10 +12,6 @@
 
 > `NODE_ENV=production npm start`
 
-## TEST
+## Test
 
 > `npm test`
-
-## Development
-
-> `npm start`
