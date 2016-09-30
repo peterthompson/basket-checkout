@@ -73,7 +73,7 @@ export class Checkout extends Component {
           </tbody>
         </table>
         <form onSubmit={evt => { evt.preventDefault(); applyPromoCode(this.promoCode.value) }}>
-          <label for="promo-code">Enter Promo Code</label>
+          <label htmlFor="promo-code">Enter Promo Code</label>
           <input id="promo-code" type="text" defaultValue={promoCode} ref={n => { this.promoCode = n }} />
           <input type="submit" value="Apply" />
         </form>
@@ -95,7 +95,7 @@ export class Checkout extends Component {
           </tbody>
         </table>
         <form onSubmit={evt => { evt.preventDefault(); luhn.validate(this.creditCard.value) && checkout(products, this.creditCard.value) }}>
-          <label for="credit-card">Please enter your credit card number</label>
+          <label htmlFor="credit-card">Please enter your credit card number</label>
           <input id="credt-card" type="text" ref={n => { this.creditCard = n }} />
           <input type="submit" value="Checkout" disabled={!products.length}  />
         </form>

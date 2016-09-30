@@ -1,11 +1,11 @@
-import assert from 'assert'
-import React from 'react'
-import Success from '../../app/js/components/Success'
+import { assert } from 'chai'
 import { shallow } from 'enzyme'
+import React from 'react'
+import Failure from '../../../app/js/components/Failure'
 
-describe('Success component', () => {
+describe('Failure component', () => {
   it('should render a paragraph', () => {
-    const wrapper = shallow(<Success />);
+    const wrapper = shallow(<Failure />);
     const p = wrapper.find('p');
     assert.equal(p.length, 1, `did not find a paragraph, found ${p.length}`)
   })

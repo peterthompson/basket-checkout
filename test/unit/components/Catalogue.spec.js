@@ -3,8 +3,8 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import { Link } from 'react-router'
 import sinon from 'sinon'
-import { routes } from '../../app/js/constants'
-import { Catalogue } from '../../app/js/components/Catalogue'
+import { routes } from '../../../app/js/constants'
+import { Catalogue } from '../../../app/js/components/Catalogue'
 
 const render = jsx => {
   const wrapper = shallow(jsx);

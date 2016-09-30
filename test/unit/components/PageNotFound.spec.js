@@ -2,8 +2,8 @@ import { assert } from 'chai'
 import { shallow } from 'enzyme'
 import React from 'react'
 import { Link } from 'react-router'
-import { routes } from '../../app/js/constants'
-import PageNotFound from '../../app/js/components/PageNotFound'
+import { routes } from '../../../app/js/constants'
+import PageNotFound from '../../../app/js/components/PageNotFound'
 
 const render = jsx => {
   const wrapper = shallow(jsx);

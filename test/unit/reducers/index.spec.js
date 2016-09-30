@@ -1,7 +1,7 @@
 import deepFreeze from 'deep-freeze'
 import expect from 'expect'
-import * as reducers from '../../app/js/reducers'
-import * as types from '../../app/js/constants/ActionTypes'
+import * as reducers from '../../../app/js/reducers'
+import * as types from '../../../app/js/constants/ActionTypes'
 
 const products = [
   {
